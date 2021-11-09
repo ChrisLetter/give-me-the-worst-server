@@ -1,14 +1,14 @@
-const { ApolloServer } = require('apollo-server');
-const { PORT } = require('./config');
+import { ApolloServer } from 'apollo-server';
+import config from './config';
 const typeDefs = ``;
 const resolver = ``;
 
 const server = new ApolloServer({ typeDefs, resolver });
 
-server.listen({ port: PORT }, (err: any) => {
+server.listen({ port: config.PORT }, (err: any) => {
   if (err) {
     console.log(err);
   } else {
-    `server listening on port ${PORT}`;
+    `server listening on port ${config.PORT}`;
   }
 });
