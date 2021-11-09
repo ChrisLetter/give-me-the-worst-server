@@ -32,10 +32,9 @@ const placeSchema = new Schema({
   },
   photoReference: {
     type: String,
-    required: true,
   },
   totalUserRating: {
-    type: String,
+    type: Number,
   }
 })
 

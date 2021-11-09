@@ -20,7 +20,7 @@ const userSchema = new Schema({
   },
   places: {
     type: Array,
-    required: true,
+    default: []
   },
 });
 
