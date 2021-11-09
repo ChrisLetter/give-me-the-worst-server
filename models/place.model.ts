@@ -17,7 +17,6 @@ const placeSchema = new Schema({
   },
   averageRating: {
     type: Number,
-    required: true
   },
   reviews: {
     type: Array

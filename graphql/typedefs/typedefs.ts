@@ -11,15 +11,13 @@ type User {
 type Place {
   id: String!
   name: String!
-  latitude: Number!
-  longitude: Number!
-  averageRating: Number!
+  latitude: Int!
+  longitude: Int!
+  averageRating: Int
   reviews: [String]
   placeId: String!
   placeType: String!
   photoReference: String
-  totalUserRating: Number
+  totalUserRating: Int
 }
-
-
 `
