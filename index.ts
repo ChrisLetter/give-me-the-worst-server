@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server';
 import config from './config';
-const typeDefs = ``;
-const resolver = ``;
+import typeDefs from './graphql/typeDefs/typeDefs';
+import resolvers from './graphql/resolvers/index.resolvers';
 
-const server = new ApolloServer({ typeDefs, resolver });
+const server = new ApolloServer({ typeDefs, resolvers });
 
 server.listen({ port: config.PORT }, (err: any) => {
   if (err) {
