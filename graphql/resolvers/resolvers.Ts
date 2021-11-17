@@ -2,7 +2,7 @@ const { UserModel } = require('../../models/model');
 
 module.exports = {
   Mutation: {
-    loginUser: async (_, { loginInput }) => {
+    loginUser: async (_: any, { loginInput }) => {
       const { email, password } = loginInput;
       const user = await UserModel.findOne({
         email: email,
@@ -17,7 +17,7 @@ module.exports = {
       }
     },
 
-    createUser: async (_, { registrationInput }) => {
+    createUser: async (_: any, { registrationInput }) => {
       const { firstName, lastName, email, password } = registrationInput;
       console.log(registrationInput);
       const user = await UserModel.findOne({ email: email });

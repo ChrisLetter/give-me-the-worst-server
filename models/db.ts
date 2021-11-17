@@ -6,8 +6,8 @@ mongoose.connect('mongodb://localhost/db_give-me-the-shit'),
     useUnifiedTopology: true,
   },
   console.log('⚽️ connected to database');
-(err) => {
+(err: any) => {
   if (err) return console.log(err);
 };
 
-module.exports = mongoose;
+export = mongoose;
