@@ -1,6 +1,7 @@
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./graphql/typeDefs/typeDefs.js');
 const resolvers = require('./graphql/resolvers/resolvers');
+const PORT = process.env.PORT || 4000;
 
 const server = new ApolloServer({
   typeDefs,
@@ -12,6 +13,6 @@ const server = new ApolloServer({
   // },
 });
 
-server.listen(4000).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+server.listen(PORT).then(() => {
+  console.log(`🚀 Server ready`);
 });
