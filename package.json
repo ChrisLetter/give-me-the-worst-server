@@ -2,7 +2,7 @@
   "name": "give-me-the-worst-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "lint": "eslint \"./**/*{js,jsx,ts,tsx}\" --quiet",
     "start": "nodemon --exec ts-node index.ts"

@@ -18,7 +18,7 @@ const typeDefs = gql`
     reviews: [String]
     placeId: String!
     placeType: String!
-    photoReference: String
+    photoReference: String!
     totalUserRating: Int
   }
 
@@ -29,11 +29,23 @@ const typeDefs = gql`
   type Mutation {
     loginUser(loginInput: LoginUserInput): UserInfo!
     createUser(registrationInput: RegisterUserInput): UserInfo!
+    addPlace(
+      addPlaceObjectInput: PlaceInput
+      userInfo: InputUserInfo
+    ): ConfirmationMessage!
+    deletePlace(
+      deletePlaceId: DeletePlaceInput
+      userInfo: InputUserInfo
+    ): ConfirmationMessage!
   }
 
   type UserInfo {
     _id: String!
     accessToken: String!
+  }
+
+  type ConfirmationMessage {
+    message: String!
   }
 
   input LoginUserInput {
@@ -46,6 +58,28 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String!
+  }
+
+  input InputUserInfo {
+    _id: String!
+    accessToken: String!
+  }
+
+  input PlaceInput {
+    _id: String
+    name: String!
+    latitude: Int!
+    longitude: Int!
+    averageRating: Int
+    reviews: [String]
+    placeId: String!
+    placeType: String!
+    photoReference: String
+    totalUserRating: Int
+  }
+
+  input DeletePlaceInput {
+    _id: String
   }
 `;
 
