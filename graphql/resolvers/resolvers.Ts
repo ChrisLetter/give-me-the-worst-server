@@ -1,6 +1,10 @@
 //@ts-ignore
 const { UserModel, PlaceModel } = require('../../models/model');
-import { IPlace, IUserFromDB } from '../../interfaces/interfaces';
+import { IPlace } from '../../interfaces/interfaces';
+const { AuthenticationError } = require('apollo-server');
+const bcrypt = require('bcrypt');
+import { createToken } from './auth';
+
 //@ts-ignore
 module.exports = {
   Mutation: {
@@ -8,14 +12,17 @@ module.exports = {
       const { email, password } = loginInput;
       const user = await UserModel.findOne({
         email: email,
-        password: password,
       });
-      console.log('user from db', user);
       if (!user) {
-        console.log('User name or password is incorrect');
+        throw new AuthenticationError('There was an error logging in');
+      }
+      const validatedPassword = bcrypt.compare(password, user.password);
+      if (!validatedPassword) {
+        throw new AuthenticationError('There was an error logging in');
       } else {
-        console.log(user._id);
-        return { _id: user._id, accessToken: 'fakeToken' };
+        const _idString = user._id.toString();
+        const token = createToken(_idString);
+        return { _id: user._id, accessToken: token };
       }
     },
 
@@ -23,18 +30,20 @@ module.exports = {
       const { firstName, lastName, email, password } = registrationInput;
       const user = await UserModel.findOne({ email: email });
       if (user) {
-        console.log(user);
-        console.log('User already exists, please login');
+        throw new AuthenticationError(
+          'there was an error creating the account',
+        );
       } else {
-        const newUser = await UserModel.create({
+        const hash = await bcrypt.hash(password, 10);
+        const user = await UserModel.create({
           firstName: firstName,
           lastName: lastName,
           email: email,
-          password: password,
+          password: hash,
         });
-        console.log('newUser', newUser);
-
-        return { _id: newUser._id, accessToken: 'fakeToken' };
+        const _idString = user._id.toString();
+        const token = await createToken(_idString);
+        return { _id: user._id, accessToken: token };
       }
     },
 
