@@ -1,11 +1,9 @@
-//@ts-ignore
 const { UserModel, PlaceModel } = require('../../models/model');
 import { IPlace } from '../../interfaces/interfaces';
 const { AuthenticationError } = require('apollo-server');
 const bcrypt = require('bcrypt');
 import { createToken } from './auth';
 
-//@ts-ignore
 module.exports = {
   Mutation: {
     loginUser: async (_: any, { loginInput }) => {
@@ -96,9 +94,9 @@ module.exports = {
         user.save();
         messageToSend = 'This place was successfully added!';
       }
-      console.log(messageToSend);
       return { message: messageToSend };
     },
+
     deletePlace: async (_: any, { deletePlaceId, userInfo }) => {
       const user = await UserModel.findOne({ _id: userInfo._id });
       const updatedPlaces = user.places.filter((item: string) => {

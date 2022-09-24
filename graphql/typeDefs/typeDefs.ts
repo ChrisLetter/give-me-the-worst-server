@@ -9,6 +9,7 @@ const typeDefs = gql`
     password: String!
     places: [String]
   }
+  
   type Place {
     _id: String
     name: String!

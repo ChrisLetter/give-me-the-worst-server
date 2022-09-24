@@ -3,7 +3,6 @@ const typeDefs = require('./graphql/typeDefs/typeDefs');
 const resolvers = require('./graphql/resolvers/resolvers');
 require('dotenv').config();
 const PORT = process.env.PORT;
-console.log(PORT);
 import { getUserFromToken, createToken } from './graphql/resolvers/auth';
 
 const server = new ApolloServer({
@@ -17,5 +16,5 @@ const server = new ApolloServer({
 });
 
 server.listen(PORT).then(() => {
-  console.log(`🚀 Server ready`);
+  console.log(`🚀 Server ready at port ${PORT}`);
 });
